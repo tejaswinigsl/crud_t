@@ -12,4 +12,6 @@ django-crispy-forms==1.11.2
 typing-extensions==3.7.4.3
 gunicorn==20.1.0
 middleware==1.2.3
+whitenoise==5.2.0
+django-heroku==0.3.1
 
