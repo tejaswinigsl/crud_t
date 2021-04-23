@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+ {% extends 'app/base.html'%}
+ {%block body_block%}
+<br>
+ <h2 style="color: white;">Add Employee</h2>
+ <form method="post" action='register'>
+  {% csrf_token %}
+  <style>
+  input::placeholder {
+    color:grey;
+    font-size: 1em;
+    position: absolute;
+    text-align: center;
+  }
+</style>
+  
+  <input type="number" name="id" placeholder="Id" style="height: 20px; font-size: 14pt;"> <br>
+  <br>
+  <input type="text" name="name" placeholder="Name" style="height: 20px; font-size: 14pt;"> <br><br>
+  <input type="number" name="phone" placeholder="Phoneno" style="height: 20px; font-size: 14pt;"> <br><br>
+  <input type="number" name="age" placeholder="Age" style="height: 20px; font-size: 14pt;"> <br><br>
+  <input type="email" name="email" placeholder="Email" style="height: 20px; font-size: 14pt;"> <br>
+  <br>
+  <input  class= "btn btn-primary btn-lg1" role="button" type="submit" >  <br>
+ 
+  </form>  
+
+<br><br>
+
+<h2 style="color: white;">Employee Details</h2>
+<br>
+<div ng-app="myApp" ng-controller="MyController">
+    <div ng-if=[[res]]>
+      <h3 class=[[classStyle]] role="alert" id="alt"></h3>
+    </div>
+  </div>
+
+  <table class="table table-borderless table-dark">
+   
+    <thead class="border-bottom font-weight-bold " >
+   <tr style="font-size: medium;">
+<th >Employee Id  </th>
+ <th > Name  </th>
+<th >Phone   </th>
+<th>Age</th>
+ <th > Email  </th>
+ <th ></th>
+   </tr>  
+    
+ </thead>
+ {%for emp in employees %}
+ <tr>
+ <td >{{emp.empid}}</td>
+ <td>{{emp.name}}</td>
+ <td>{{emp.phone}}</td>
+ <td>{{emp.age}}</td>
+<td>{{emp.email}}</td>
+<td>
+<a href="/update/{{emp.id}}" class="btn btn-info  btn-lg" >
+  update</a>
+
+ <a href="/delete/{{emp.id}}"class="btn btn-danger   btn-lg">  delete </a>
+</td>
+</tr>
+{%endfor%}
+</table><br>
+
+<script>
+    var myApp = angular.module("myApp", []);
+        myApp.config(function($interpolateProvider) {
+        $interpolateProvider.startSymbol('[[');
+        $interpolateProvider.endSymbol(']]');
+        });
+        myApp.controller("MyController", ["$scope", function($scope) {
+        $scope.msg = "{{msg}}";
+        $scope.classStyle = "{{classStyle}}";
+        $scope.res = "{{res}}"
+        setTimeout(myVar = function(){ document.getElementById("alt").style.display = 'none'
+      }, 3000);
+        }]);
+    </script>
+
+
+{%endblock%}
