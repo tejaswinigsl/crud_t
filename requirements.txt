@@ -10,4 +10,6 @@ six==1.15.0
 sqlparse==0.4.1
 django-crispy-forms==1.11.2
 typing-extensions==3.7.4.3
+gunicorn==20.1.0
+middleware==1.2.3
 
